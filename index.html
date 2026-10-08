@@ -44,7 +44,6 @@
             min-height: 100vh;
         }
 
-        /* Cabecera superior */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -75,7 +74,6 @@
             color: var(--link-hover);
         }
 
-        /* Título y Fecha con Ticker */
         header {
             text-align: center;
             margin-top: 15px;
@@ -114,7 +112,6 @@
             flex-shrink: 0;
         }
 
-        /* Animación de los titulares */
         .ticker-wrap {
             flex: 1;
             overflow: hidden;
@@ -145,7 +142,6 @@
             margin: 40px 0;
         }
 
-        /* Cuadrículas asimétricas */
         .grid-featured {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -216,7 +212,6 @@
             color: #cccccc;
         }
 
-        /* Vista de artículo */
         #article-view {
             display: none;
             max-width: 800px;
@@ -296,7 +291,6 @@
             color: var(--text-color);
         }
 
-        /* Footer y Modales */
         footer {
             border-top: 1px solid var(--border-color);
             padding: 30px 0;
@@ -425,7 +419,6 @@
             border-color: #4CAF50;
         }
 
-        /* Bloqueo de pantalla para la llamada */
         .call-overlay {
             display: none;
             position: fixed;
@@ -439,7 +432,6 @@
             display: block;
         }
 
-        /* Estilos del panel de llamada */
         .call-panel {
             position: fixed;
             bottom: 0;
@@ -506,7 +498,6 @@
             border-color: #ff3333;
         }
 
-        /* --- ESTILOS DEL MINIJUEGO DE LUIS --- */
         #minigame-container {
             display: none;
             position: fixed;
@@ -521,7 +512,6 @@
             text-align: center;
         }
 
-        /* Botón de Atrás para la sección especial */
         .mg-back-btn {
             position: absolute;
             top: 25px;
@@ -576,7 +566,6 @@
             -webkit-user-drag: none;
         }
 
-        /* Zona de drop invisible específicamente sobre el bicho negro */
         .mg-dropzone {
             position: absolute;
             top: 20%;
@@ -586,7 +575,6 @@
             z-index: 10;
         }
 
-        /* Contenedor estático para reservar el espacio del alma */
         .mg-soul-wrapper {
             width: 60px;
             height: 60px;
@@ -669,12 +657,10 @@
 </head>
 <body>
 
-<!-- REPRODUCTORES DE AUDIO -->
 <audio id="bg-music" loop>
-    <source src="ambiente.ogg" type="audio/ogg">
+    <source src="ambiente.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Música de fondo de la sección especial de Luis -->
 <audio id="minigame-bg-music" loop>
     <source src="backrooms.mp3" type="audio/mpeg">
 </audio>
@@ -683,30 +669,24 @@
     <source src="" type="audio/ogg">
 </audio>
 
-<!-- Sonido reproducido al entregar el alma -->
 <audio id="win-sound">
     <source src="victoria.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Sonido reproducido al colgar la llamada -->
 <audio id="hangup-sound">
     <source src="colgar.m4a" type="audio/mp4">
 </audio>
 
-<!-- Etiqueta de audio dinámica para la llamada -->
 <audio id="call-audio"></audio>
 
-<!-- Overlay de Bloqueo de Pantalla para Llamada -->
 <div id="call-overlay" class="call-overlay"></div>
 
-<!-- Panel de Llamada Inferior -->
 <div id="call-panel" class="call-panel">
     <div class="call-header">Servicio técnico</div>
     <div id="call-timer" class="call-timer">00:00</div>
     <button class="hangup-btn" onclick="endCall()">Colgar</button>
 </div>
 
-<!-- Modales -->
 <div id="riddle-modal" class="modal-overlay">
     <div class="modal-box">
         <button class="modal-close" onclick="closeInitialModal()">&times;</button>
@@ -845,7 +825,6 @@
 
     <main id="home-view">
         
-        <!-- SECCIÓN DESTACADA -->
         <div class="grid-featured">
             
             <div class="article-col col-span-2 row-span-2 b-right">
@@ -937,7 +916,6 @@
 
         <hr class="section-divider">
 
-        <!-- SECCIÓN SECUNDARIA -->
         <div class="grid-secondary">
             
             <div class="article-col col-span-2 b-right b-bottom">
@@ -1076,11 +1054,9 @@
         <div id="av-byline" class="article-full-byline">Por Autor</div>
         
         <div id="av-image" class="image-placeholder article-full-image">
-            <!-- La imagen se inyecta dinámicamente aquí -->
         </div>
         
         <div id="av-body" class="article-full-body">
-            <!-- El contenido dinámico se inyecta aquí -->
         </div>
     </main>
 
@@ -1100,9 +1076,7 @@
 
 </div>
 
-<!-- CONTENEDOR DEL MINIJUEGO DE LUIS -->
 <div id="minigame-container">
-    <!-- Botón de Atrás para regresar a la página principal -->
     <button class="mg-back-btn" onclick="exitMinigame()">&lt; Atrás</button>
 
     <h1 id="mg-title" class="mg-title">Aquí esta el cuerpo de origen</h1>
@@ -1113,7 +1087,6 @@
         <div id="mg-dropzone" class="mg-dropzone"></div>
     </div>
     
-    <!-- Área de recompensa situada justo debajo de la imagen -->
     <div id="mg-reward-area" class="mg-reward-area">
         <div class="mg-reward-text">Descubre el origen de como perdió su alma</div>
         <audio controls id="reward-audio">
@@ -1122,32 +1095,26 @@
         </audio>
     </div>
 
-    <!-- Contenedor estático para reservar espacio del alma -->
     <div class="mg-soul-wrapper">
         <div id="mg-soul" class="mg-soul"></div>
     </div>
 </div>
 
 <script>
-    // Variable global para controlar si el alma ya fue entregada
     let soulDelivered = false;
 
-    // 1. Forzar subida al top de la página de forma inmediata
     window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Asegurarnos de que inicie arriba del todo
         window.scrollTo(0, 0);
         
-        // --- NUEVO: Comprobar si el alma ya fue entregada en una visita anterior ---
         if (localStorage.getItem('soulDelivered') === 'true') {
             soulDelivered = true;
             const almaCount = document.getElementById('alma-count');
             if (almaCount) almaCount.innerText = "0";
         }
 
-        // 2. Mostrar fecha estática limpia
         const dateElement = document.getElementById('current-date');
         if (dateElement) {
             const opcionesFecha = { 
@@ -1162,27 +1129,22 @@
             dateElement.textContent = fechaFormateada;
         }
 
-        // --- SISTEMA DE NOTICIAS ALEATORIAS ---
         const tickerContainer = document.querySelector('.ticker');
         if (tickerContainer) {
-            // Extraer los textos y filtrar los puntos separadores
             const spans = Array.from(tickerContainer.querySelectorAll('span'));
             const noticias = spans.map(span => span.textContent).filter(text => text.trim() !== '•' && text.trim() !== '');
 
-            // Mezclar las noticias al azar (Algoritmo de Fisher-Yates)
             for (let i = noticias.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [noticias[i], noticias[j]] = [noticias[j], noticias[i]];
             }
 
-            // Vaciar el contenedor y rellenarlo con el nuevo orden
             tickerContainer.innerHTML = '';
             noticias.forEach((noticia) => {
                 const spanNoticia = document.createElement('span');
                 spanNoticia.textContent = noticia;
                 tickerContainer.appendChild(spanNoticia);
 
-                // Volver a añadir el separador
                 const spanSeparador = document.createElement('span');
                 spanSeparador.textContent = '•';
                 tickerContainer.appendChild(spanSeparador);
@@ -1190,12 +1152,10 @@
         }
         // ---------------------------------------------
 
-        // 3. Abrir automáticamente modal del acertijo al entrar
         setTimeout(() => {
             openModal('riddle-modal');
         }, 300);
 
-        // --- SISTEMA CÓDIGO LUIS ---
         const luisInput = document.getElementById('luis-code-input');
         if (luisInput) {
             luisInput.addEventListener('input', function() {
@@ -1206,7 +1166,6 @@
             });
         }
 
-        // --- CONTROL DE AUDIO DE RECOMPENSA (Sexta cosa) ---
         const rewardAudio = document.getElementById('reward-audio');
         const mgBgMusic = document.getElementById('minigame-bg-music');
 
@@ -1216,7 +1175,6 @@
             });
 
             rewardAudio.addEventListener('pause', function() {
-                // Si la pantalla del minijuego sigue activa, reanudar música del minijuego
                 if (document.getElementById('minigame-container').style.display === 'flex') {
                     if (mgBgMusic) mgBgMusic.play().catch(e => console.log(e));
                 }
@@ -1230,7 +1188,6 @@
         }
     });
 
-    // --- MANEJO DEL CLIC EN ALMA EN PROPIEDAD (Cuarta cosa) ---
     function handleAlmaClick() {
         if (soulDelivered) {
             startLuisMinigame();
@@ -1239,12 +1196,10 @@
         }
     }
 
-    // --- SISTEMA DE LLAMADA AL SERVICIO TÉCNICO ---
     let timerInterval;
     let seconds = 0;
     const callAudio = document.getElementById('call-audio');
     
-    // Lista de audios con sus porcentajes de probabilidad (suman 100%)
     const audiosDisponibles = [
         { src: "mohaudio.mp3", prob: 60 },    // 60% de probabilidad
         { src: "osloaudio.mp3", prob: 20 },   // 20% de probabilidad
@@ -1299,7 +1254,6 @@
         callAudio.pause();
         callAudio.currentTime = 0;
         
-        // Reproducir sonido de colgar SOLO si había una llamada activa
         if (isCallActive) {
             const hangupSound = document.getElementById('hangup-sound');
             if (hangupSound) {
@@ -1323,37 +1277,29 @@
     callAudio.onended = function() {
         endCall();
     };
-    // ----------------------------------------------
 
-    // --- SISTEMA DE MINIJUEGO LUIS (Segunda y Tercera cosa) ---
     function startLuisMinigame() {
-        // Si había una llamada activa al entrar, finalizarla adecuadamente
         endCall();
 
-        // Pausar música ambiental normal
         const bgMusic = document.getElementById('bg-music');
         if (bgMusic) {
             bgMusic.pause();
         }
 
-        // Iniciar música de la sección especial
         const mgBgMusic = document.getElementById('minigame-bg-music');
         if (mgBgMusic) {
             mgBgMusic.volume = 0.2;
             mgBgMusic.play().catch(e => console.log("Error al reproducir música especial:", e));
         }
 
-        // Ocultar página principal y mostrar minijuego
         document.querySelector('.container').style.display = 'none';
         document.getElementById('minigame-container').style.display = 'flex';
         
-        // --- NUEVO: Si el alma ya fue entregada, mostramos la victoria y detenemos la ejecución ---
         if (soulDelivered) {
             winMinigame();
             return; 
         }
 
-        // Lógica de arrastrar bola del alma
         const soul = document.getElementById('mg-soul');
         const dropzone = document.getElementById('mg-dropzone');
         
@@ -1422,34 +1368,27 @@
         }
     }
 
-    // --- SALIR DEL MINIJUEGO / BOTÓN ATRÁS (Tercera y Quinta cosa) ---
     function exitMinigame() {
-        // Pausar música especial
         const mgBgMusic = document.getElementById('minigame-bg-music');
         if (mgBgMusic) {
             mgBgMusic.pause();
             mgBgMusic.currentTime = 0;
         }
 
-        // Pausar audio de recompensa si estuviese sonando
         const rewardAudio = document.getElementById('reward-audio');
         if (rewardAudio) {
             rewardAudio.pause();
         }
 
-        // Mostrar vista principal
         document.getElementById('minigame-container').style.display = 'none';
         document.querySelector('.container').style.display = 'block';
 
-        // Asegurarse de limpiar cualquier estilo en línea en el panel de llamadas
         const callPanel = document.getElementById('call-panel');
         if (callPanel) callPanel.style.display = '';
 
-        // Asegurarse de que ningún modal secundario vuelva a aparecer automáticamente
         closeModal('riddle-modal');
         closeModal('luis-modal');
 
-        // Reanudar música ambiental normal
         const bgMusic = document.getElementById('bg-music');
         if (bgMusic) {
             bgMusic.volume = 0.2;
@@ -1466,16 +1405,13 @@
         const rewardArea = document.getElementById('mg-reward-area');
         const winSound = document.getElementById('win-sound');
 
-        // Reproducir sonido al entregar el alma
         if (winSound) {
             winSound.currentTime = 0;
             winSound.play().catch(e => console.log("Error al reproducir sonido de victoria:", e));
         }
 
-        // Marcar alma como entregada y actualizar contador a 0
         soulDelivered = true;
         
-        // Guardar el progreso en el navegador
         localStorage.setItem('soulDelivered', 'true'); 
 
         const almaCount = document.getElementById('alma-count');
@@ -1491,10 +1427,8 @@
 
         rewardArea.style.display = 'flex';
     }
-    // ----------------------------------------------
 
 
-    // SISTEMA DE AUDIO (Clic general)
     document.addEventListener('click', function(e) {
         let clickSound = document.getElementById('click-sound');
         if (clickSound) {
@@ -1524,7 +1458,6 @@
         }
     }
 
-    // Funciones de navegación de artículos
     function openArticle(articleElement) {
         const headline = articleElement.querySelector('.headline').innerText;
         const imageHTML = articleElement.querySelector('.image-placeholder').innerHTML;
