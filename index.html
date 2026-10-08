@@ -593,7 +593,7 @@
             box-shadow: 0 0 25px 12px rgba(76, 175, 80, 0.5);
             animation: pulse 1.5s infinite alternate;
             z-index: 20;
-            touch-action: none; /* Previene scroll en móviles al arrastrar */
+            touch-action: none;
         }
 
         .mg-soul:active { cursor: grabbing; }
@@ -684,7 +684,7 @@
 <div id="call-panel" class="call-panel">
     <div class="call-header">Servicio técnico</div>
     <div id="call-timer" class="call-timer">00:00</div>
-    <button class="hangup-btn" onclick="endCall()">Colgar</button>
+    <button class="hangup-btn" onclick="endCall(true)">Colgar</button>
 </div>
 
 <div id="riddle-modal" class="modal-overlay">
@@ -1150,7 +1150,6 @@
                 tickerContainer.appendChild(spanSeparador);
             });
         }
-        // ---------------------------------------------
 
         setTimeout(() => {
             openModal('riddle-modal');
@@ -1201,9 +1200,9 @@
     const callAudio = document.getElementById('call-audio');
     
     const audiosDisponibles = [
-        { src: "mohaudio.mp3", prob: 60 },    // 60% de probabilidad
-        { src: "osloaudio.mp3", prob: 20 },   // 20% de probabilidad
-        { src: "germanaudio.mp3", prob: 20 }   // 20% de probabilidad
+        { src: "mohaudio.mp3", prob: 60 },    
+        { src: "osloaudio.mp3", prob: 20 },   
+        { src: "germanaudio.mp3", prob: 20 }  
     ];
 
     function obtenerAudioPorProbabilidad() {
@@ -1246,7 +1245,7 @@
         document.getElementById('call-timer').innerText = `${mins}:${secs}`;
     }
 
-    function endCall() {
+    function endCall(isManual = false) {
         const callPanel = document.getElementById('call-panel');
         const isCallActive = callPanel && callPanel.classList.contains('active');
 
@@ -1254,7 +1253,7 @@
         callAudio.pause();
         callAudio.currentTime = 0;
         
-        if (isCallActive) {
+        if (isCallActive && isManual) {
             const hangupSound = document.getElementById('hangup-sound');
             if (hangupSound) {
                 hangupSound.currentTime = 0;
@@ -1427,7 +1426,6 @@
 
         rewardArea.style.display = 'flex';
     }
-
 
     document.addEventListener('click', function(e) {
         let clickSound = document.getElementById('click-sound');
